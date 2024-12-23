@@ -1,8 +1,13 @@
-# RPi AI-HATを使う
+# RPi AI HAT+を使う
 
+### Link
+- https://www.raspberrypi.com/documentation/
+- https://www.raspberrypi.com/documentation/computers/ai.html
+- https://github.com/hailo-ai/hailo-rpi5-examples/blob/main/doc/install-raspberry-pi5.md
+- 
 ### Hardware
 Raspberry Pi 5 (8GB)  
-Raspberry Pi AI HAT (26TOPS)
+Raspberry Pi AI HAT+ (26TOPS)
 
 ### Software
 ```
@@ -162,3 +167,35 @@ Plugin Details:
   3 features:
   +-- 3 elements
 ```
+
+### GUIを有効にする
+```
+$ sudo apt-get install raspberrypi-ui-mods
+$ sudo raspi-config
+-> 1 System Options
+    -> S5 Boot / Auto Login
+        -> B3 Desktop
+            -> Finish
+                -> Reboot
+```
+
+### RDPでリモート接続する
+```
+$ sudo apt-get install xrdp
+$ sudo usermod -a -G ssl-cert <user>
+```
+
+### hailo-rpi5-exampleを動かす
+```
+$ sudo apt-get install meson
+
+$ git clone https://github.com/hailo-ai/hailo-rpi5-examples.git
+$ cd hailo-rpi5-examples
+$ . setup_env.sh
+(venv_hailo_rpi5_examples) $ pip install -r requirements.txt
+(venv_hailo_rpi5_examples) $ ./download_resources.sh
+(venv_hailo_rpi5_examples) $ ./compile_postprocess.sh
+(venv_hailo_rpi5_examples) $ python basic_pipelines/detection.py
+```
+
+
